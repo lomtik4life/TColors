@@ -7,17 +7,18 @@ var ctx = canvas.getContext("2d");
 var topColor = [];
 var clr = document.getElementById('clr');
 var idList = ['clr-one', 'clr-two', 'clr-three', 'clr-four', 'clr-five'] // all id cart
+var HistoryArrNamesLi = ['history-one','history-two','history-three','history-four','history-five'] // history li
 var idNumber = -1
 var ds = new Date() 
 var number = localStorage.getItem('number')?localStorage.getItem('number'):5
 var TimeHistory = localStorage.getItem('time')?localStorage.getItem('time'):60
+var arrNames = localStorage.getItem('names')?localStorage.getItem('names').split(','):[]
 
 document.getElementById('historySecondNumber').value = TimeHistory
 document.getElementById('setCardsNumber').value = number
 
 document.getElementById('btn-start').onclick = function(){
-	//takeImage()
-	menageImage(5)
+	takeImage()
 }
 document.getElementById('historyClean').onclick = function(){
     historyClean()
@@ -34,7 +35,17 @@ document.getElementById('btn-about').onclick = function(){
 document.getElementById('about').onclick = function(){
     about()
 }
-
+document.getElementById('history').onclick = function(e){
+    for (var i = 0; i < 5; i++) {
+        if (HistoryArrNamesLi[i] === e.path[1].id) break
+    }
+    placeRight();
+    document.getElementById('btn-x').style.display = 'none';
+    document.getElementById('btn-setting').style.display = 'block';
+    document.getElementById('btn-history').style.display = 'block';
+    console.log(localStorage.getItem(localStorage.getItem('names').split(',')[i]).split())
+    drawCart(localStorage.getItem(localStorage.getItem('names').split(',')[i]).split())
+}
 // Click to color and clickToCopy()
 clr.onclick = function(e){
 	var className = e.path[1].className;
@@ -53,30 +64,35 @@ clr.onmouseover = function(e) {
 }
 
 document.getElementById('btn-setting').onclick = function(){
-	placeRight();
-	settingShow();
+    placeRight();   
+    settingShow();    
 }
 
 document.getElementById('btn-history').onclick = function(){
-    placeRight();
-    historyShow();
+    placeRight();    
+    historyShow();    
 }
+document.getElementById('btn-x').onclick = function(){
+    placeRight();
+    document.getElementById('btn-x').style.display = 'none';
+    document.getElementById('btn-setting').style.display = 'block';
+    document.getElementById('btn-history').style.display = 'block';
+}
+
 
 lStorage('get')
   /////////////
   // Initial //
   /////////////
-/*
+
 imgS.onload = function() {
 	console.log('loading image ... OK!')
 	menageImage(5)
 }
-*/
 
    //////////////////////  
    // Screenshot Image //  return img
    //////////////////////
-/*
 function takeImage() {
 	console.log('function takeImage()')
 	chrome.tabs.captureVisibleTab(
@@ -88,7 +104,6 @@ function takeImage() {
 		}
 	);
 }
-*/
 
    ///////////////// attr : (numberColor1, numbetColor2, ?defferince)
    // Seems color // !defferince?
@@ -102,14 +117,14 @@ function seems(nc1, nc2, def) {
   //////////////////  img to let arrayColor
   // img To array //  return colorTop
   //////////////////  attr : (numberTopElment)
+//function menageImage(number) {
+//	arr = [[252,255,255],[238,238,28],[100,205,30],[10,110,110],[234,200,200],[1,1,1],[23,25,67],[230,200,238],[145,100,230],[230,230,100]]
+//	drawCart(arr.slice(0,number))
+//	lStorage('set',arr)
+//}
+
 function menageImage(number) {
-	arr = [[252,255,255],[238,238,28],[100,205,30],[10,110,110],[234,200,200],[1,1,1],[23,25,67],[230,200,238],[145,100,230],[230,230,100]]
-	drawCart(arr.slice(0,number))
-	lStorage('set',arr)
-}
- /*
-}
-function menageImage(number) {
+    var testTime = new Date() 
 	console.log('function menageImage()')
 	var arrayColorSrc = [];
 	//var arrayColorNS = [];
@@ -132,6 +147,9 @@ function menageImage(number) {
 			len++
 		}
 	}
+    var testTime2 = testTime
+    var testTime = new Date()
+    console.log(testTime2 - testTime \ 1000)
 	console.log('Creative \'arrayColorSrc[]\' - OK!')
 	console.log('var len = ' + len + '  // arrayColorSrc.length')
 
@@ -163,7 +181,6 @@ function menageImage(number) {
 	arrayColorTopKeys.sort(sIncrease).reverse()
 	
 	function see(arr,clr) {
-		console.log('function see(arr, ' + clr + ')')
 		var val = 5; /// value !!
 		var sc = clr.split(',')
 		var len = Object.keys(arr).length
@@ -204,7 +221,7 @@ function menageImage(number) {
 	
 	draw = diffirentColor(number)
 }
-*/
+
 
 function drawAllRect(colorArr,n) {
 	console.log('function drawAllRect( '+colorArr,n+')')
@@ -378,6 +395,13 @@ function clickToCopy(nameColor) {
 };
 
 function placeRight() {
+    if (document.getElementById('btn-x').style.display = 'none') {
+        document.getElementById('btn-x').style.display = 'block';
+        document.getElementById('btn-setting').style.display = 'none';
+        document.getElementById('btn-history').style.display = 'none';
+    }
+    document.getElementById('setting').style.display = 'none';
+    document.getElementById('history').style.display = 'none';
 	var pr = document.getElementById('place-right')
 	if (pr.offsetWidth === 20) {
 		pr.style.width = '300px';
@@ -440,12 +464,12 @@ function about(action) {
 }
 
 function historyShow() {
-	var hs = document.getElementById('setting');
-	if (hs.style.display === 'none' || !st.style.display) {
-		hs.style.display = 'block'
+	var hs = document.getElementById('history');
+	if (hs.style.display === 'none') {
+		document.getElementById('history').style.display = 'block';
         historyFill();
 	} else {
-		hs.style.display = 'none'
+		document.getElementById('history').style.display = 'none'
 	}
 }
 
@@ -453,5 +477,15 @@ function historyFill() {
     if (!localStorage.getItem('names')) {
         document.getElementById('history-one').getElementsByTagName('LI')[0].innerHTML = 'No history'
     }
-    var arrNames = localStorage.getItem()
+    var arrNames = localStorage.getItem('names').split(',')
+    for (var i = 0; i < arrNames.length && i < 5; i++) {
+        var hanl = document.getElementById(HistoryArrNamesLi[i])
+        var arrColor = localStorage.getItem(arrNames[i]).split(';')
+        hanl.getElementsByTagName('P')[0].innerHTML = arrNames[i]
+        for (var n = 0; n < arrColor.length-1; n++) {
+            hanl.getElementsByTagName('LI')[n].style.background = rgbToHex(arrColor[n])
+        }
+        
+    }
+    
 }
