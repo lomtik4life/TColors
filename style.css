@@ -1,0 +1,140 @@
+body {
+	height: 170px;
+	width: 330px;
+	background: #F6F6F6;
+	outline: 1px solid red;
+	margin: 0px;
+}
+ul {
+	list-style: none;
+}
+
+#btn-start {
+	position: absolute;
+	top: 0px; left: 40px;
+	text-align: center;
+	height: 25px;
+	width: 60px;
+	background: #2196F3;
+	border-left: 2px solid #1976D2;
+	border-right: 2px solid #1976D2;
+	border-bottom: 2px solid #0D47A1;
+	border-radius: 0px 0px 1px 1px;
+	color: #F0F0F0;
+}
+#time {
+	position: absolute;
+	top: 0px; left: 110px;
+}
+#clr {
+	position: absolute;
+	top: 45px; left: 25px;
+}
+#clr ul {
+	margin: 0px;
+	padding: 0px;
+	height: 130px;
+}
+#clr ul li {
+	background: #F0F0F0;
+	display: none;
+	width: 48px;
+	height: 121px;
+	border: 1px solid black;
+}
+#clr p {
+	margin: 3px;
+	font-size: 12px;
+}
+.rgb {
+	margin-top: 18px; 
+	display: none;
+	background-color: rgba(255,255,255,0.6);
+}
+.hex {
+	margin-top: 18px;
+	display: none;
+	background-color: rgba(255,255,255,0.6);
+}
+#place-right {
+	position: absolute;
+	top: 0px; left: 310px;
+	height: 170px;
+	width: 20px;
+	background: #DDDDDD;
+	box-shadow: 0px -10px 10px -10px black;
+}
+#btn-setting {
+	position: absolute;
+	top: 5px; left: 5px;
+}
+#btn-history {
+	position: absolute;
+	top: 150px; left: 5px;
+}
+#historyClean {
+    position: absolute;
+    top: 5px; left: 20px;
+    border-radius: 3px;
+}
+#historySecond {
+    position: absolute;
+    width: 135px;
+    top: 30px; left: 20px;
+    border-right: 0px;
+    border-radius: 4px 0px 0px 4px;
+}
+#historySecondNumber {
+    position: absolute;
+    width: 52px; height: 17px;
+    top: 30px; left: 150px;
+    border: 2px outset buttonface;
+    border-top: 1px;
+    border-left: 0px;
+    border-radius: 0px 4px 4px 0px;
+}
+#setCards {
+    position: absolute;
+    width: 155px;
+    top: 60px; left: 20px;
+    border-right: 0px;
+    border-radius: 4px 0px 0px 4px;
+}
+#setCardsNumber {
+    position: absolute;
+    width: 27px; height: 17px;
+    top: 60px; left: 175px;
+    border: 2px outset buttonface;
+    border-top: 1px;
+    border-left: 0px;
+    border-radius: 0px 4px 4px 0px;
+}
+#setting {
+	display: none;
+}
+#history {
+	display: none;
+}
+#canvas {
+	display: none;
+}
+
+#btn-about {
+    position: absolute;
+    top: 150px; left: 250px;
+    border-right: 0px;
+}
+#about {
+    display: none;
+    position: absolute;
+    padding: 0 5% 0 5%;
+    width: 80%; min-height: 80%;
+    margin: 0 auto;
+    top: 0px; left: 0px; right: 0px; bottom: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px #555555;
+}
+.li-grey {
+    font-size: 0.8em;
+    margin: 0 0 5px 0;
+}

@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "My Extension",
+  "version": "0.01",
+  "description": "A plain text description",
+  "icons": {"128" : "icon/icon128.png"},
+
+  "browser_action": { // Элементы браузера
+  	"default_title": "button", // Название кнопки
+  	"default_icon": "icon/icon128.png", // Иконка для кнопки
+  	"default_popup": "index.html" // Всплывающее окно
+  },
+
+  "background": {
+    "page": "index.html",
+    "persistent": true
+  },
+
+  "permissions": ["tabs", "contextMenus", "pageCapture" , "<all_urls>"]
+}
