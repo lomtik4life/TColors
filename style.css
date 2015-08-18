@@ -91,7 +91,7 @@ ul {
 }
 #historySecondNumber {
     position: absolute;
-    width: 52px; height: 17px;
+    width: 52px; height: 21px;
     top: 30px; left: 150px;
     border: 2px outset buttonface;
     border-top: 1px;
@@ -107,7 +107,7 @@ ul {
 }
 #setCardsNumber {
     position: absolute;
-    width: 27px; height: 17px;
+    width: 27px; height: 21px;
     top: 60px; left: 175px;
     border: 2px outset buttonface;
     border-top: 1px;
@@ -124,22 +124,24 @@ ul {
     height: 0px;
 }
 #history p  {
+    white-space: nowrap;
+    font-size: 20px;
     position: relative;
     text-shadow: 0px 0px 7px #FFFFFF;
     left: 20px;
     display: inline-block;
-    margin-top: -25px;
-    margin-bottom: 0px;
+    margin: 2px;
     text-decoration: underline;
 }
 #history ul {
     position: absolute;
-    right: 20px;
+    right: 0px;
     margin: 0px; padding: 0px;
+    margin-top: -25px;
 }
 #history li {
     display: inline-block;
-    height: 16px; width: 7px
+    height: 25px; width: 9px;
 }
 #canvas {
 	display: none;

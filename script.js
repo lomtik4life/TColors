@@ -11,10 +11,12 @@ var HistoryArrNamesLi = ['history-one','history-two','history-three','history-fo
 var idNumber = -1
 var ds = new Date() 
 var number = localStorage.getItem('number')?localStorage.getItem('number'):5
-var TimeHistory = localStorage.getItem('time')?localStorage.getItem('time'):60
+var TimeHistory = localStorage.getItem('time')?localStorage.getItem('time'):60000
 var arrNames = localStorage.getItem('names')?localStorage.getItem('names').split(','):[]
+var step = 7 //
+var differenceColor = 10
 
-document.getElementById('historySecondNumber').value = TimeHistory
+document.getElementById('historySecondNumber').value = TimeHistory/60000
 document.getElementById('setCardsNumber').value = number
 
 document.getElementById('btn-start').onclick = function(){
@@ -43,8 +45,7 @@ document.getElementById('history').onclick = function(e){
     document.getElementById('btn-x').style.display = 'none';
     document.getElementById('btn-setting').style.display = 'block';
     document.getElementById('btn-history').style.display = 'block';
-    console.log(localStorage.getItem(localStorage.getItem('names').split(',')[i]).split())
-    drawCart(localStorage.getItem(localStorage.getItem('names').split(',')[i]).split())
+    drawCart(localStorage.getItem(localStorage.getItem('names').split(',')[i]).split(';'))
 }
 // Click to color and clickToCopy()
 clr.onclick = function(e){
@@ -81,20 +82,19 @@ document.getElementById('btn-x').onclick = function(){
 
 
 lStorage('get')
+
+
   /////////////
   // Initial //
   /////////////
-
 imgS.onload = function() {
-	console.log('loading image ... OK!')
-	menageImage(5)
+	menageImage()
 }
 
    //////////////////////  
    // Screenshot Image //  return img
    //////////////////////
 function takeImage() {
-	console.log('function takeImage()')
 	chrome.tabs.captureVisibleTab(
 		null,
 		{},
@@ -105,30 +105,14 @@ function takeImage() {
 	);
 }
 
-   ///////////////// attr : (numberColor1, numbetColor2, ?defferince)
-   // Seems color // !defferince?
-   /////////////////
-function seems(nc1, nc2, def) {
-	var temp = Math.abc(nc1 - nc2);
-	if (!def) def = 40;
-	return temp < def
-}
-
   //////////////////  img to let arrayColor
   // img To array //  return colorTop
   //////////////////  attr : (numberTopElment)
-//function menageImage(number) {
-//	arr = [[252,255,255],[238,238,28],[100,205,30],[10,110,110],[234,200,200],[1,1,1],[23,25,67],[230,200,238],[145,100,230],[230,230,100]]
-//	drawCart(arr.slice(0,number))
-//	lStorage('set',arr)
-//}
 
-function menageImage(number) {
+function menageImage() {
+    console.log('menageImage()')
     var testTime = new Date() 
-	console.log('function menageImage()')
 	var arrayColorSrc = [];
-	//var arrayColorNS = [];
-	//var arrayColorR = [];
 	var arrayColor = {};        // All array color {['color'],...}
 	var arrayColorTop = {};     // Mirror arrayColor {'numberDef':'color',...}
 	var arrayColorTopKeys = []; // Keys arrayColorTop {['numberDef'],...}
@@ -139,19 +123,15 @@ function menageImage(number) {
 	//var lenR = 0;
 	topColor = [];
 	// Create array color (0,0,0,0) in arrayColorSrc
-	for (var i = 0; i < aH; i++) {
-		for (var n = 0; n < aW; n++) {
+	for (var i = 0; i < aH; i += step) {
+		for (var n = 0; n < aW; n += step) {
 			var pixel = ctx.getImageData(n,i,1,1);
 			var temp = [pixel.data[0], pixel.data[1], pixel.data[2]]
 			arrayColorSrc.push(temp)
 			len++
 		}
 	}
-    var testTime2 = testTime
-    var testTime = new Date()
-    console.log(testTime2 - testTime \ 1000)
-	console.log('Creative \'arrayColorSrc[]\' - OK!')
-	console.log('var len = ' + len + '  // arrayColorSrc.length')
+    console.log('var arrayColorSrc')
 
 	// for arrayColor object 
 	for (var i = 0; i < len; i++) {
@@ -161,14 +141,11 @@ function menageImage(number) {
 			arrayColor[arrayColorSrc[i]] = 1
 		}
 	}
-	console.log('Creative \'arrayColor{}\' - OK!')
-
 	// For arrayColorMirror
 	for (i in arrayColor) {
 		arrayColorTop[arrayColor[i]] = i
 		arrayColorTopKeys.push(arrayColor[i])
 	}
-
 	// Function  Sort
 	function sIncrease(i, ii) { // По возрастанию
 		if (i > ii)
@@ -179,9 +156,7 @@ function menageImage(number) {
  		return 0;
 	}
 	arrayColorTopKeys.sort(sIncrease).reverse()
-	
 	function see(arr,clr) {
-		var val = 5; /// value !!
 		var sc = clr.split(',')
 		var len = Object.keys(arr).length
 		var ii = 0
@@ -190,20 +165,19 @@ function menageImage(number) {
 			var sa = arr[i].split(',')
 			for (var z = 0; z < 3; z++) {
 				var temp = parseInt(sa[z]) - parseInt(sc[z])
-				if (Math.abs(temp) < val) zam++
+				if (Math.abs(temp) < differenceColor) zam++
 				if (zam === 2) return false
 			}	
 		}
 		return true
 	}
-
 	//
-	function diffirentColor(number) {
-		console.log('function differentColor('+number+')')
+	function diffirentColor() {
 		var colorReturn = [];
 		var i = 0, n = 0;
 		while (number !== n) {
 			var cT = arrayColorTop[arrayColorTopKeys[i]] // = [str,str,str]
+            if (!arrayColorTop[arrayColorTopKeys[i]]) return colorReturn
 			if (!i) {
 				colorReturn.push(cT)
 				i++
@@ -218,27 +192,11 @@ function menageImage(number) {
 		}
 		return colorReturn
 	}
-	
-	draw = diffirentColor(number)
+	draw = diffirentColor()
+    if (draw.length < number) number = draw.length
+    drawCart(draw)
+    lStorage('set',draw)
 }
-
-
-function drawAllRect(colorArr,n) {
-	console.log('function drawAllRect( '+colorArr,n+')')
-	ul = document.getElementById('ul')
-	while (n) {
-		n--
-		li = document.createElement('li')
-		li.innerHTML = colorArr[n]
-		li.id = n
-		ul.appendChild(li)
-		document.getElementById(n).style.backgroundColor = 'rgb'+colorArr[n];
-	}
-}
-
-
-
-
 
 	//////////////////////////////////
 	// Mouse over cart. Cart zoomx2 //
@@ -276,7 +234,7 @@ function zoomColorCart(id){
 	////////////////////////////////////////////////////////////
 function drawCart(arrayColor) {
 	var element = document.getElementById('clr').getElementsByTagName('LI')
-	for (var i = 0; i < arrayColor.length; i++) {
+	for (var i = 0; i < number; i++) {
 		element[i].style.display = 'inline-block'
 		element[i].style.backgroundColor = 'rgb('+arrayColor[i]+')'
 	}
@@ -293,7 +251,7 @@ function rgbToHex(rgbClr) {
 // Cart write rgb and hex color
 function rbgHex(dom) {
 	var color = dom.style.backgroundColor
-	for (var i = 0; i < 5; i++) {
+	for (var i = 0; i < number; i++) {
 		document.getElementsByClassName('rgb')[i].style.display = 'none'
 		document.getElementsByClassName('hex')[i].style.display = 'none'
 	}
@@ -326,9 +284,11 @@ function lStorage(action, arrClr) {
 
 	chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
     	tabUrl = tabs[0].url;
-    	if (action === 'get' && localStorage.getItem(tabUrl) && ds.getTime() - localStorage.getItem(tabUrl+'time') < TimeHistory) {
-    		var timeago = (ds.getTime() - localStorage.getItem(tabUrl+'time')) / 1000
-    		document.getElementById('time').innerHTML = 'Load result ' + timeago.toFixed(1) + ' seconds ago.'
+        console.log(action,tabUrl)
+        console.log(action === 'get', localStorage.getItem(tabUrl), ds.getTime() - localStorage.getItem(tabUrl+'time'), TimeHistory)
+    	if (action === 'get' && ds.getTime() - localStorage.getItem(tabUrl+'time') < TimeHistory) {
+            var timeago = (ds.getTime() - localStorage.getItem(tabUrl+'time')) / 60000
+    		document.getElementById('time').innerHTML = 'Load result ' + timeago.toFixed(0) + ' min. ago.'
 	        drawCart(stringToArray(localStorage.getItem(tabUrl)).slice(0,number));                 // Gracia!!! Return array the city color in array Local
 	    }
 
@@ -431,16 +391,23 @@ function historyClean() {
         localStorage.removeItem(el[i]+'time')
     }
     localStorage.removeItem('names')
-    document.getElementById('historyClean')
+    for (var i = 0; i < 5; i++) {
+        var hanl = document.getElementById(HistoryArrNamesLi[i])
+        hanl.getElementsByTagName('P')[0].innerHTML = ''
+        for (var s = 0; s < 5; s++) {
+            hanl.getElementsByTagName('LI')[s].style.background = '';
+        }
+        
+    }
 }
 
 // secont time in history
 function setHS() {
-    if (document.getElementById('historySecondNumber').value < 360000) {
-        localStorage.setItem('time',document.getElementById('historySecondNumber').value)
-        TimeHistory = document.getElementById('historySecondNumber').value
+    if (document.getElementById('historySecondNumber').value < 61) {
+        localStorage.setItem('time',document.getElementById('historySecondNumber').value*60000)
+        TimeHistory = document.getElementById('historySecondNumber').value*60000
     } else {
-        document.getElementById('historySecondNumber').value = 600;
+        document.getElementById('historySecondNumber').value = 60;
     }
 }
 
@@ -448,7 +415,7 @@ function setHS() {
 function setCN() {
     if (document.getElementById('setCardsNumber').value > 0 && document.getElementById('setCardsNumber').value < 11) {
         localStorage.setItem('number',document.getElementById('setCardsNumber').value);
-        number = document.getElementById('historySecondNumber').value
+        number = document.getElementById('setCardsNumber').value
     } else {
         document.getElementById('historySecondNumber').value = 5;
     }
@@ -475,15 +442,17 @@ function historyShow() {
 
 function historyFill() {
     if (!localStorage.getItem('names')) {
-        document.getElementById('history-one').getElementsByTagName('LI')[0].innerHTML = 'No history'
+        document.getElementById('history-one').getElementsByTagName('P')[0].innerHTML = 'No history'
+    } else {
+        document.getElementById('history-one').getElementsByTagName('P')[0].innerHTML = ''
     }
     var arrNames = localStorage.getItem('names').split(',')
     for (var i = 0; i < arrNames.length && i < 5; i++) {
         var hanl = document.getElementById(HistoryArrNamesLi[i])
         var arrColor = localStorage.getItem(arrNames[i]).split(';')
         hanl.getElementsByTagName('P')[0].innerHTML = arrNames[i]
-        for (var n = 0; n < arrColor.length-1; n++) {
-            hanl.getElementsByTagName('LI')[n].style.background = rgbToHex(arrColor[n])
+        for (var s = 0; s < (arrColor.length - 1) && s < number; s++) {
+            hanl.getElementsByTagName('LI')[s].style.background = rgbToHex(arrColor[s])
         }
         
     }

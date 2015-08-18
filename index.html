@@ -123,44 +123,54 @@
 		<div id="place-right">
 			<div id="setting">
 				<input type="button" value='Clean history' id='historyClean'>
-				<input type="button" value='History seconds ' id='historySecond'>
-				<input type="number" value='5' max='600' min='1' id='historySecondNumber'>
+				<input type="button" value='History minutes ' id='historySecond'>
+				<select required size = "1" id='historySecondNumber' onChange="alert(this.value)">  
+                    <option value="1">1</option> 
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="30">30</option>
+                    <option value="60">60</option> 
+                </select>
 				<input type="button" value='Set the number of cards ' id='setCards'>
-				<input type="number" value='1' max='10' min='1' id='setCardsNumber'>
 				<input type="button" value='About' id='btn-about'>
+				<select required size = "1" id='setCardsNumber' onChange="alert(this.value)">  
+                    <option value="1">1</option> 
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option> 
+                </select>
 			</div>
 			<div id="history">
 				<div id="history-one">
-				<br>
-					<ul>
-						<li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-					</ul>
 					<p></p>
+					<ul>
+						<li></li><li></li><li></li><li></li><li></li>
+					</ul>
 				</div>
 				<div id="history-two">
-                 <br>
-					 <ul>
-						<li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+				    <p></p>
+				    <ul>
+						<li></li><li></li><li></li><li></li><li></li>
 					</ul>
-					<p></p>
 				</div>
 				<div id="history-three">
-					 <ul>
-						<li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+				    <p></p>
+				    <ul>
+						<li></li><li></li><li></li><li></li><li></li>
 					</ul>
-					<p></p>
 				</div>
 				<div id="history-four">
-					 <ul>
-						<li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+				    <p></p>
+				    <ul>
+						<li></li><li></li><li></li><li></li><li></li>
 					</ul>
-					<p></p>
 				</div>
 				<div id="history-five">
+                 <p></p>
 					 <ul>
-						<li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-					</ul>
-					<p></p>
+						<li></li><li></li><li></li><li></li><li></li>
+                    </ul>
 				</div>
 			</div>
 			<div id="btn-setting">=</div>
@@ -176,11 +186,11 @@
                 <li>History second : 60</li>
                 <li class='li-grey'>Min 60sec. Max 360000 sec.</li>
                 <li>the number of cards : 5</li>
-                <li class="li-grey">Min 1, max 10. Recomendation <= 5</li>
+                <li class="li-grey">Min 1, max 5.</li>
             </ul>
             
         </p>
-    </div>
+    </div> 
 
 	<canvas id="canvas" width='2000' height='5000'>canvas</canvas>
 	<script src='script.js'></script>
