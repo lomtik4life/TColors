@@ -20,6 +20,7 @@ document.getElementById('historySecondNumber').value = TimeHistory/60000
 document.getElementById('setCardsNumber').value = number
 
 document.getElementById('btn-start').onclick = function(){
+    document.getElementById('load').style.display = 'block'
 	takeImage()
 }
 document.getElementById('historyClean').onclick = function(){
@@ -110,7 +111,6 @@ function takeImage() {
   //////////////////  attr : (numberTopElment)
 
 function menageImage() {
-    console.log('menageImage()')
     var testTime = new Date() 
 	var arrayColorSrc = [];
 	var arrayColor = {};        // All array color {['color'],...}
@@ -131,7 +131,6 @@ function menageImage() {
 			len++
 		}
 	}
-    console.log('var arrayColorSrc')
 
 	// for arrayColor object 
 	for (var i = 0; i < len; i++) {
@@ -233,6 +232,7 @@ function zoomColorCart(id){
 	// Color cart magical transformation and fill rgb and hex //
 	////////////////////////////////////////////////////////////
 function drawCart(arrayColor) {
+    document.getElementById('load').style.display = 'none'
 	var element = document.getElementById('clr').getElementsByTagName('LI')
 	for (var i = 0; i < number; i++) {
 		element[i].style.display = 'inline-block'
@@ -284,8 +284,6 @@ function lStorage(action, arrClr) {
 
 	chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
     	tabUrl = tabs[0].url;
-        console.log(action,tabUrl)
-        console.log(action === 'get', localStorage.getItem(tabUrl), ds.getTime() - localStorage.getItem(tabUrl+'time'), TimeHistory)
     	if (action === 'get' && ds.getTime() - localStorage.getItem(tabUrl+'time') < TimeHistory) {
             var timeago = (ds.getTime() - localStorage.getItem(tabUrl+'time')) / 60000
     		document.getElementById('time').innerHTML = 'Load result ' + timeago.toFixed(0) + ' min. ago.'

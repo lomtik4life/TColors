@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	
 	<div id="main">
 		<!-- colors cart -->
 		<div id="void"></div>
@@ -62,65 +61,19 @@
 						<p class="clr-hex-value">(,,)</p></br>
 					</div>
 				</li>
-				<li id="clr-six">
-					 <div id="clr-six-rgb" class="rgb">
-						<p class="clr-rgb-name">rgb</p>
-						<p class="clr-rgb-value">#___</p>
-					</div> 
-					<div id="clr-six-hex" class="hex">
-						<p class="clr-hex-name">hex</p>
-						<p class="clr-hex-value">(,,)</p></br>
-					</div>
-				</li>
-				<li id="clr-seven">
-					 <div id="clr-seven-rgb" class="rgb">
-						<p class="clr-rgb-name">rgb</p>
-						<p class="clr-rgb-value">#___</p>
-					</div> 
-					<div id="clr-seven-hex" class="hex">
-						<p class="clr-hex-name">hex</p>
-						<p class="clr-hex-value">(,,)</p></br>
-					</div>
-				</li>
-				<li id="clr-eighy">
-					 <div id="clr-eighy-rgb" class="rgb">
-						<p class="clr-rgb-name">rgb</p>
-						<p class="clr-rgb-value">#___</p>
-					</div> 
-					<div id="clr-eighy-hex" class="hex">
-						<p class="clr-hex-name">hex</p>
-						<p class="clr-hex-value">(,,)</p></br>
-					</div>
-				</li>
-				<li id="clr-nine">
-					 <div id="clr-nine-rgb" class="rgb">
-						<p class="clr-rgb-name">rgb</p>
-						<p class="clr-rgb-value">#___</p>
-					</div> 
-					<div id="clr-nine-hex" class="hex">
-						<p class="clr-hex-name">hex</p>
-						<p class="clr-hex-value">(,,)</p></br>
-					</div>
-				</li>
-				<li id="clr-ten">
-					 <div id="clr-ten-rgb" class="rgb">
-						<p class="clr-rgb-name">rgb</p>
-						<p class="clr-rgb-value">#___</p>
-					</div> 
-					<div id="clr-ten-hex" class="hex">
-						<p class="clr-hex-name">hex</p>
-						<p class="clr-hex-value">(,,)</p></br>
-					</div>
-				</li>
 			</ul>
 		</div>
+		
 		<!-- Header buttom -->
 		<div id="head-menu">
-			<div id="btn-start">start</div>
+			<div id="btn-start">Start</div>
 			<div id="time"></div>
 		</div>
+		
 		<!-- Right -->
 		<div id="place-right">
+		
+		<!-- Setting -->
 			<div id="setting">
 				<input type="button" value='Clean history' id='historyClean'>
 				<input type="button" value='History minutes ' id='historySecond'>
@@ -141,59 +94,46 @@
                     <option value="5">5</option> 
                 </select>
 			</div>
+			
+			<!-- History -->
 			<div id="history">
 				<div id="history-one">
 					<p></p>
-					<ul>
-						<li></li><li></li><li></li><li></li><li></li>
-					</ul>
+					<ul><li></li><li></li><li></li><li></li><li></li></ul>
 				</div>
 				<div id="history-two">
 				    <p></p>
-				    <ul>
-						<li></li><li></li><li></li><li></li><li></li>
-					</ul>
+				    <ul><li></li><li></li><li></li><li></li><li></li></ul>
 				</div>
 				<div id="history-three">
 				    <p></p>
-				    <ul>
-						<li></li><li></li><li></li><li></li><li></li>
-					</ul>
+				    <ul><li></li><li></li><li></li><li></li><li></li></ul>
 				</div>
 				<div id="history-four">
 				    <p></p>
-				    <ul>
-						<li></li><li></li><li></li><li></li><li></li>
-					</ul>
+				    <ul><li></li><li></li><li></li><li></li><li></li></ul>
 				</div>
 				<div id="history-five">
-                 <p></p>
-					 <ul>
-						<li></li><li></li><li></li><li></li><li></li>
-                    </ul>
+           <p></p>
+					  <ul><li></li><li></li><li></li><li></li><li></li></ul>
 				</div>
 			</div>
+			
+			<!-- Button -->
 			<div id="btn-setting">=</div>
             <div id="btn-x">x</div>
 			<div id="btn-history">h</div>
+			
 		</div>
 	</div>
+	
+	<!-- About windows-->
     <div id="about">
-        <h2>TColor alpha 0.2.</h2>
-        <p>
-            <ul>
-                <li><h3>default values:</h3></li>
-                <li>History second : 60</li>
-                <li class='li-grey'>Min 60sec. Max 360000 sec.</li>
-                <li>the number of cards : 5</li>
-                <li class="li-grey">Min 1, max 5.</li>
-            </ul>
-            
-        </p>
+        <h2>TColor alpha.</h2>
     </div> 
 
 	<canvas id="canvas" width='2000' height='5000'>canvas</canvas>
 	<script src='script.js'></script>
-
+    <p id='load'>Load...</p>
 </body>
 </html>
