@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "My Extension",
-  "version": "0.01",
-  "description": "A plain text description",
+  "name": "TColors",
+  "version": "0.34",
+  "description": "Tcolor - show all the colors of the most popular on the site.",
   "icons": {"128" : "icon/icon128.png"},
 
   "browser_action": { // Элементы браузера
@@ -16,5 +16,5 @@
     "persistent": true
   },
 
-  "permissions": ["tabs", "contextMenus", "pageCapture" , "<all_urls>"]
+  "permissions": ["tabs", "pageCapture" , "<all_urls>"]
 }
