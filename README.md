@@ -10,3 +10,5 @@
 This browser extension based on chromium.
 
 Reads a pixel from the active tab. And it shows 5 (1-10) colored cards with the names in the format rbg and hex. When you click on them, they are copied to the clipboard. If the site reopen within 600sek (0-36000) colored cards displayed from memory. The program remembers the 20 sites all SETUP.
+
+https://chrome.google.com/webstore/detail/tcolors/bnndnlppimbfmblfekkmcnnamoiclnae
